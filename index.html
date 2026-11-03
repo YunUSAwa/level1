@@ -1,0 +1,451 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Türkçe 13 Ünite</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: kareli defter; üstte 13 ünite kutusu, altında seçili ünite: Flashcards · Worksheet · Game */
+:root{
+  --paper:#f6f8fb; --grid:#dfe6f0; --card:#ffffff; --ink:#1d2a44; --muted:#5d6b85;
+  --blue:#2457c5; --blue-soft:#e3ebfb; --red:#d23c3c; --red-soft:#fbe5e5;
+  --green:#1f8a55; --green-soft:#dff3e8; --sun:#f2b630; --sun-soft:#fdf2d4; --line:#d3dbe8; --on-blue:#ffffff;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141b29; --grid:#1b2436; --card:#1b2435; --ink:#e7ecf6; --muted:#9daac2;
+  --blue:#7ea4f5; --blue-soft:#22325a; --red:#f07b7b; --red-soft:#4a2228;
+  --green:#5fd39a; --green-soft:#183d2c; --sun:#f5c55a; --sun-soft:#3d3218; --line:#2c3850; --on-blue:#10172a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141b29; --grid:#1b2436; --card:#1b2435; --ink:#e7ecf6; --muted:#9daac2;
+  --blue:#7ea4f5; --blue-soft:#22325a; --red:#f07b7b; --red-soft:#4a2228;
+  --green:#5fd39a; --green-soft:#183d2c; --sun:#f5c55a; --sun-soft:#3d3218; --line:#2c3850; --on-blue:#10172a; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 60px;display:grid;gap:18px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+button{font-family:inherit;color:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+header h1{font-size:clamp(2rem,6vw,2.9rem);font-weight:800;color:var(--blue)}
+header h1 span{color:var(--red)}
+header p{margin:2px 0 0;color:var(--muted);font-weight:600}
+
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.ubtn{display:grid;grid-template-columns:auto 1fr;gap:0 10px;align-items:center;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px 10px;cursor:pointer;min-width:0}
+.ubtn:hover{border-color:var(--blue)}
+.ubtn[aria-current="true"]{border-color:var(--ink);background:var(--blue-soft)}
+.ubtn .n{grid-row:span 2;font-family:var(--display);font-weight:800;font-size:1.3rem;width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:var(--blue);color:var(--on-blue)}
+.ubtn.done .n{background:var(--green)}
+.ubtn b{font-size:.92rem;line-height:1.2;overflow-wrap:anywhere}
+.ubtn small{color:var(--muted);font-size:.78rem;line-height:1.2}
+
+.unit{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px 24px;display:grid;gap:14px;min-width:0}
+.uhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:6px 16px}
+.uhead h2{font-size:clamp(1.5rem,4.5vw,2rem)}
+.uhead .eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--red)}
+.uhead .en{color:var(--muted);font-weight:700}
+.parts{display:flex;flex-wrap:wrap;gap:8px;border-bottom:2px solid var(--line);padding-bottom:12px}
+.part{border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:7px 16px;font-weight:800;cursor:pointer}
+.part[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.dir{margin:0;padding:10px 14px;background:var(--sun-soft);border-radius:10px;font-weight:700;max-width:70ch}
+.dir::before{content:"Directions: ";color:var(--red);font-weight:800}
+h3{font-size:1.2rem;margin-top:6px}
+
+/* flashcards */
+.fcwrap{display:grid;justify-items:center;gap:12px}
+.fc{all:unset;cursor:pointer;width:100%;max-width:460px;aspect-ratio:4/3;perspective:1200px;display:block}
+.fc-in{position:relative;display:block;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;display:grid;place-content:center;justify-items:center;gap:8px;padding:18px;text-align:center;border:3px solid var(--ink)}
+.front{background:var(--card)}
+.back{background:var(--blue-soft);transform:rotateY(180deg)}
+.face .tr{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,6vw,2.4rem);line-height:1.1}
+.face .enw{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,5vw,1.9rem);color:var(--blue);line-height:1.15}
+.face .hint{font-size:.85rem;color:var(--muted);font-weight:700}
+.fc:focus-visible .face{outline:3px solid var(--sun)}
+.big svg{width:96px;height:96px}
+.emo{font-size:64px;line-height:1}
+.fcbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center}
+.cnt{font-weight:800;font-variant-numeric:tabular-nums;min-width:60px;text-align:center}
+
+/* buttons */
+.btn{font-weight:800;font-size:1rem;border:0;border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--blue);color:var(--on-blue)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn.ghost:hover{border-color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+
+/* worksheet */
+.wshead{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;align-items:baseline}
+.score{font-family:var(--display);font-weight:800;color:var(--green);font-size:1.15rem;font-variant-numeric:tabular-nums}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.col{display:grid;gap:8px;align-content:start;min-width:0}
+.mbtn{display:flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--card);border-radius:10px;padding:6px 10px;font-weight:700;font-size:1rem;cursor:pointer;min-height:54px;text-align:left;min-width:0;overflow-wrap:anywhere}
+.mbtn svg{width:38px;height:38px;flex:none}
+.mbtn .emo{font-size:30px}
+.mbtn.sel{border-color:var(--blue);background:var(--blue-soft)}
+.mbtn.ok{border-color:var(--green);background:var(--green-soft);cursor:default}
+.mbtn.bad{border-color:var(--red);background:var(--red-soft)}
+.fill{display:grid;gap:4px;margin:0;padding:0;list-style:none;counter-reset:q}
+.fill li{counter-increment:q;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:9px 0;border-bottom:1px dashed var(--line);font-weight:600}
+.fill li::before{content:counter(q) ".";font-family:var(--display);font-weight:800;color:var(--red);min-width:24px}
+.fill svg{width:40px;height:40px}
+.fill .emo{font-size:32px}
+.fill select,.fill input{font-weight:800;font-size:1rem;color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:8px;padding:4px 8px}
+.fill input{width:11ch}
+.fill .ok{border-color:var(--green);background:var(--green-soft)}
+.fill .bad{border-color:var(--red);background:var(--red-soft)}
+.fb{font-size:.9rem;font-weight:800}
+.fb.ok{color:var(--green)}.fb.bad{color:var(--red)}
+
+/* games */
+.game{display:grid;gap:14px;justify-items:center;text-align:center}
+.game h3{font-size:1.5rem}
+.hud{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hud span{background:var(--sun-soft);border-radius:999px;padding:4px 14px;font-weight:800;font-variant-numeric:tabular-nums}
+.timer{width:100%;max-width:520px;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--sun)}
+.qbox{font-family:var(--display);font-size:clamp(1.35rem,4.5vw,1.9rem);font-weight:700;max-width:28ch;display:grid;justify-items:center;gap:4px}
+.qbox svg{width:90px;height:90px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;max-width:540px}
+.opt{font-weight:800;font-size:1.08rem;padding:14px 10px;border-radius:12px;border:2px solid var(--ink);background:var(--card);cursor:pointer;overflow-wrap:anywhere}
+.opt:hover:not(:disabled){background:var(--blue-soft)}
+.opt.ok{background:var(--green-soft);border-color:var(--green)}
+.opt.bad{background:var(--red-soft);border-color:var(--red)}
+.stars{font-size:2.2rem;letter-spacing:4px;color:var(--sun)}
+.mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%;max-width:640px}
+.tile{aspect-ratio:1;max-width:100%;border-radius:12px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);cursor:pointer;display:grid;place-content:center;justify-items:center;gap:2px;padding:4px;font-weight:800;font-size:clamp(.72rem,2.6vw,1rem);line-height:1.15;overflow:hidden;overflow-wrap:anywhere}
+.tile.closed{font-family:var(--display);font-size:2rem}
+.tile.open{background:var(--card);color:var(--ink)}
+.tile.ok{background:var(--green-soft);color:var(--ink);border-color:var(--green);cursor:default}
+.tile svg{width:44%;height:auto;aspect-ratio:1}
+.tile .emo{font-size:clamp(22px,6vw,34px)}
+.slots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:52px}
+.slot{width:42px;height:50px;border-bottom:4px solid var(--ink);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.7rem}
+.slots.bad .slot{border-color:var(--red);color:var(--red)}
+.slots.ok .slot{border-color:var(--green);color:var(--green)}
+.letters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:540px}
+.let{width:48px;height:52px;border-radius:10px;border:2px solid var(--ink);background:var(--sun-soft);font-family:var(--display);font-weight:800;font-size:1.6rem;cursor:pointer}
+.let:disabled{opacity:.25;cursor:default}
+.unav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:520px){.mem{grid-template-columns:repeat(3,minmax(0,1fr))}.mbtn{font-size:.9rem;padding:6px}.unit{padding:16px 14px 20px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-kitap" viewBox="0 0 64 64"><path d="M8 14c8-4 16-4 24 2v38c-8-6-16-6-24-2z" fill="#3f7be0"/><path d="M56 14c-8-4-16-4-24 2v38c8-6 16-6 24-2z" fill="#5b93f0"/><path d="M32 16v38" stroke="#1d2a44" stroke-width="2"/><path d="M13 22c5-2 9-2 14 1M13 29c5-2 9-2 14 1M37 23c5-3 9-3 14-1M37 30c5-3 9-3 14-1" stroke="#fff" stroke-width="2" fill="none"/></symbol>
+  <symbol id="i-kalem" viewBox="0 0 64 64"><g transform="rotate(-45 32 32)"><rect x="12" y="26" width="34" height="12" fill="#f2b630"/><rect x="8" y="26" width="6" height="12" rx="2" fill="#e88a9a"/><rect x="13" y="26" width="3" height="12" fill="#b9b9b9"/><path d="M46 26l12 6-12 6z" fill="#f3d9b0"/><path d="M54 30l4 2-4 2z" fill="#1d2a44"/></g></symbol>
+  <symbol id="i-defter" viewBox="0 0 64 64"><rect x="14" y="8" width="38" height="48" rx="4" fill="#d23c3c"/><rect x="22" y="18" width="24" height="10" rx="2" fill="#fff"/><g fill="#1d2a44"><circle cx="14" cy="16" r="3"/><circle cx="14" cy="26" r="3"/><circle cx="14" cy="36" r="3"/><circle cx="14" cy="46" r="3"/></g></symbol>
+  <symbol id="i-silgi" viewBox="0 0 64 64"><g transform="rotate(-20 32 32)"><rect x="10" y="22" width="44" height="20" rx="4" fill="#e88a9a"/><rect x="34" y="22" width="20" height="20" rx="4" fill="#3f7be0"/></g></symbol>
+  <symbol id="i-masa" viewBox="0 0 64 64"><rect x="6" y="20" width="52" height="8" rx="2" fill="#a86b3c"/><rect x="10" y="28" width="5" height="26" fill="#7c4d2a"/><rect x="49" y="28" width="5" height="26" fill="#7c4d2a"/><rect x="22" y="12" width="12" height="8" fill="#3f7be0"/></symbol>
+  <symbol id="i-sira" viewBox="0 0 64 64"><path d="M6 22h36l-4 8H6z" fill="#a86b3c"/><rect x="8" y="30" width="4" height="24" fill="#555f73"/><rect x="34" y="30" width="4" height="24" fill="#555f73"/><rect x="42" y="36" width="16" height="5" fill="#a86b3c"/><rect x="44" y="41" width="3" height="13" fill="#555f73"/><rect x="54" y="41" width="3" height="13" fill="#555f73"/><rect x="34" y="42" width="10" height="3" fill="#555f73"/></symbol>
+  <symbol id="i-sandalye" viewBox="0 0 64 64"><rect x="18" y="8" width="26" height="24" rx="3" fill="#2f9e6b"/><rect x="14" y="32" width="34" height="7" rx="2" fill="#2f9e6b"/><rect x="16" y="39" width="4" height="18" fill="#1d6b48"/><rect x="42" y="39" width="4" height="18" fill="#1d6b48"/></symbol>
+  <symbol id="i-cetvel" viewBox="0 0 64 64"><g transform="rotate(-30 32 32)"><rect x="4" y="24" width="56" height="16" rx="2" fill="#f2b630"/><g stroke="#1d2a44" stroke-width="2"><path d="M10 24v7M16 24v4M22 24v7M28 24v4M34 24v7M40 24v4M46 24v7M52 24v4"/></g></g></symbol>
+  <symbol id="i-makas" viewBox="0 0 64 64"><path d="M30 34L54 10M34 34L10 10" stroke="#8b96a8" stroke-width="5" stroke-linecap="round"/><circle cx="20" cy="46" r="9" fill="none" stroke="#d23c3c" stroke-width="5"/><circle cx="44" cy="46" r="9" fill="none" stroke="#d23c3c" stroke-width="5"/><circle cx="32" cy="32" r="2.5" fill="#1d2a44"/></symbol>
+  <symbol id="i-ogretmen" viewBox="0 0 64 64"><circle cx="32" cy="20" r="11" fill="#f3c9a0"/><path d="M21 18c0-9 22-9 22 0-4-3-18-3-22 0z" fill="#5a3a22"/><path d="M12 58c0-14 9-22 20-22s20 8 20 22z" fill="#3f7be0"/><rect x="24" y="18" width="7" height="5" rx="2" fill="none" stroke="#1d2a44" stroke-width="1.5"/><rect x="33" y="18" width="7" height="5" rx="2" fill="none" stroke="#1d2a44" stroke-width="1.5"/></symbol>
+  <symbol id="i-ogrenci" viewBox="0 0 64 64"><circle cx="32" cy="20" r="11" fill="#f3c9a0"/><path d="M21 17c2-10 20-10 22 0-6-4-16-4-22 0z" fill="#d9a441"/><path d="M12 58c0-14 9-22 20-22s20 8 20 22z" fill="#d23c3c"/><rect x="40" y="38" width="12" height="16" rx="2" fill="#2f9e6b"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <h1>Türkçe <span>13 Ünite</span></h1>
+    <p>A1 Turkish · Every unit: Flashcards → Worksheet → Game</p>
+  </header>
+  <nav class="units" id="units" aria-label="Units"></nav>
+  <main class="unit" id="unit"></main>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const norm=s=>String(s).trim().toLocaleLowerCase('tr-TR').replace(/[.?!,]/g,'').replace(/\s+/g,'');
+const pic=(p,cls='')=>!p?'':p.startsWith('svg:')?`<span class="${cls}"><svg aria-hidden="true"><use href="#i-${p.slice(4)}"/></svg></span>`:`<span class="emo">${p}</span>`;
+function say(t){try{const u=new SpeechSynthesisUtterance(t);u.lang='tr-TR';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const S=id=>'svg:'+id;
+
+/* sayılar */
+const ONES=['','bir','iki','üç','dört','beş','altı','yedi','sekiz','dokuz'];
+const TENS=['','on','yirmi','otuz','kırk','elli','altmış','yetmiş','seksen','doksan'];
+const word=n=>n===100?'yüz':(TENS[n/10|0]+(n%10?' '+ONES[n%10]:'')).trim();
+const ORD=['birinci','ikinci','üçüncü','dördüncü','beşinci','altıncı','yedinci','sekizinci','dokuzuncu','onuncu'];
+const SUF=['mı','mi','mu','mü'];
+const OBJ=[['kitap','book'],['kalem','pen / pencil'],['defter','notebook'],['silgi','eraser'],['masa','table'],['sira','school desk','sıra'],['sandalye','chair'],['cetvel','ruler'],['makas','scissors']].map(([id,en,tr])=>[tr||id,en,S(id)]);
+const wrongs=(arr,a,n=3)=>shuffle(arr.filter(x=>x!==a)).slice(0,n);
+
+/* ============ 13 ÜNİTE ============ */
+const U=[
+{tr:'Selamlaşma',en:'Greetings',game:'memory',gname:'Memory Match',
+ cards:[['Merhaba','Hello','👋'],['Günaydın','Good morning','🌅'],['İyi günler','Have a good day','🌤️'],['İyi akşamlar','Good evening','🌆'],['İyi geceler','Good night','🌙'],['Hoşça kal','Goodbye (the person leaving says it)','🚶'],['Güle güle','Goodbye (the person staying says it)','🙋'],['Görüşürüz','See you','🤝']],
+ ws:[{q:'It is 7 a.m. You see your teacher: ___',o:['Günaydın','İyi geceler','Güle güle'],a:'Günaydın'},
+     {q:'It is 10 p.m. You go to bed: ___',o:['İyi geceler','Günaydın','Merhaba'],a:'İyi geceler'},
+     {q:'It is 7 p.m. You meet a friend: ___',o:['İyi akşamlar','Günaydın','Hoşça kal'],a:'İyi akşamlar'},
+     {q:'You leave your friend’s house. You say: ___',o:['Hoşça kal','Güle güle','Günaydın'],a:'Hoşça kal'},
+     {q:'Your friend leaves. You stay. You say: ___',o:['Güle güle','Hoşça kal','İyi akşamlar'],a:'Güle güle'},
+     {q:'Write “Hello” in Turkish: ___',a:['merhaba']},
+     {q:'Write “See you” in Turkish: ___',a:['görüşürüz']}]},
+
+{tr:'Tanışma',en:'Introductions',game:'quiz',gname:'Dialogue Quiz',
+ cards:[['Adın ne?','What’s your name?','❓'],['Benim adım Ali.','My name is Ali.','🙋‍♂️'],['Senin adın ne?','What is your name? (and you?)','👉'],['Nasılsın?','How are you?','🙂'],['İyiyim.','I’m fine.','👍'],['Teşekkür ederim.','Thank you.','🙏'],['Sen nasılsın?','And how are you?','🤔'],['Memnun oldum.','Nice to meet you.','🤝']],
+ ws:[{q:'A: Merhaba! Adın ___?',a:['ne']},
+     {q:'B: Benim ___ Elif. Senin adın ne?',a:['adım']},
+     {q:'A: Benim adım Can. ___? (How are you?)',o:['Nasılsın','Adın ne','Hoşça kal'],a:'Nasılsın'},
+     {q:'B: ___, teşekkür ederim. (I’m fine)',a:['iyiyim']},
+     {q:'B: İyiyim, ___ ederim.',a:['teşekkür']},
+     {q:'A: Memnun ___. (Nice to meet you)',a:['oldum']}],
+ quiz:()=>[
+   {q:'— Adın ne?',a:'Benim adım Ece.',o:['İyiyim.','Güle güle.','Bu kitap.']},
+   {q:'— Nasılsın?',a:'İyiyim, teşekkür ederim.',o:['Benim adım Can.','Günaydın.','Bu kim?']},
+   {q:'— Memnun oldum.',a:'Ben de memnun oldum.',o:['Adın ne?','İyi geceler.','Bu ne?']},
+   {q:'— Benim adım Ali. Senin adın ne?',a:'Benim adım Zeynep.',o:['Nasılsın?','Teşekkür ederim.','Hoşça kal.']},
+   {q:'“Thank you” in Turkish?',a:'Teşekkür ederim.',o:['Memnun oldum.','İyiyim.','Merhaba.']},
+   {q:'“How are you?” in Turkish?',a:'Nasılsın?',o:['Adın ne?','Bu ne?','Bu kim?']},
+   {q:'“Nice to meet you.” in Turkish?',a:'Memnun oldum.',o:['Teşekkür ederim.','Güle güle.','Görüşürüz.']},
+   {q:'— İyiyim. Sen nasılsın?',a:'Ben de iyiyim.',o:['Benim adım Ece.','Bu defter.','Günaydın.']}]},
+
+{tr:'Türk Alfabesi',en:'The Turkish Alphabet',game:'quiz',gname:'Missing Letter',
+ intro:'The Turkish alphabet has 29 letters. There is no Q, W or X. These 7 letters are special to Turkish:',
+ cards:[['Ç ç — çanta','“ch” as in chair · çanta = bag','🎒','çanta'],['Ğ ğ — dağ','soft g: makes the vowel long · dağ = mountain','⛰️','dağ'],['I ı — ırmak','like “e” in taken · ırmak = river','🏞️','ırmak'],['İ i — inek','“ee” as in see · inek = cow','🐄','inek'],['Ö ö — ördek','like “ur” in fur · ördek = duck','🦆','ördek'],['Ş ş — şapka','“sh” as in ship · şapka = hat','👒','şapka'],['Ü ü — üzüm','say “ee” with round lips · üzüm = grapes','🍇','üzüm']],
+ ws:[{q:'🎒 ___anta (bag)',o:['Ç','C','Ş'],a:'Ç'},{q:'⛰️ da___ (mountain)',o:['Ğ','G','Ş'],a:'Ğ'},{q:'🐄 ___nek (cow)',o:['İ','I','Ü'],a:'İ'},
+     {q:'🦆 ___rdek (duck)',o:['Ö','O','Ü'],a:'Ö'},{q:'👒 ___apka (hat)',o:['Ş','S','Ç'],a:'Ş'},{q:'🍇 ___züm (grapes)',o:['Ü','U','Ö'],a:'Ü'},
+     {q:'How many letters are in the Turkish alphabet? ___',a:['29','yirmidokuz']},
+     {q:'Which letter is NOT in the Turkish alphabet? ___',o:['Q','Ç','Ğ'],a:'Q'}],
+ quiz:()=>[['🌸','çiçek','ç','Ç',['C','Ş','S']],['🐦','kuş','ş','Ş',['S','Ç','Ğ']],['👁️','göz','ö','Ö',['O','Ü','U']],['🍬','şeker','ş','Ş',['S','Z','Ç']],['💡','ışık','ı','I',['İ','U','Ü']],['3️⃣','üç','ü','Ü',['U','Ö','O']],['🌳','ağaç','ğ','Ğ',['G','Ş','C']],['🍋','limon','i','İ',['I','Ü','E']],['🐟','balık','ı','I',['İ','U','A']],['🚪','kapı','ı','I',['İ','Ü','E']]]
+   .map(([e,w,l,L,o])=>({q:`<span class="emo">${e}</span>${w.replace(l,'_')}`,a:L,o,say:w}))},
+
+{tr:'Sınıf Eşyaları',en:'Classroom Objects',game:'scramble',gname:'Word Builder',
+ cards:OBJ,
+ ws:shuffle(OBJ).slice(0,6).map(([tr,en,p])=>({q:`${pic(p)} This is a ${en.split(' /')[0]}. In Turkish: ___`,a:[tr]})),
+ words:()=>OBJ.map(([tr,en,p])=>({w:tr,hint:pic(p)+en}))},
+
+{tr:'“Bu ne?”',en:'“What is this?”',game:'quiz',gname:'What Is This?',
+ intro:'Use “Bu ne?” for things. Answer: “Bu ___.” (This is a ___.)',
+ cards:[['Bu ne?','What is this?','❓'],...OBJ.slice(0,7).map(([tr,en,p])=>[`Bu ${tr}.`,`This is a ${en.split(' /')[0]}.`,p])],
+ ws:shuffle(OBJ).slice(0,6).map(([tr,,p])=>({q:`${pic(p)} Bu ne? — Bu ___.`,a:[tr]})),
+ quiz:()=>OBJ.map(([tr,,p])=>({q:`${pic(p)}Bu ne?`,a:`Bu ${tr}.`,o:wrongs(OBJ.map(x=>x[0]),tr).map(w=>`Bu ${w}.`),say:`Bu ${tr}`}))},
+
+{tr:'“Bu kim?”',en:'“Who is this?”',game:'quiz',gname:'Ne or Kim?',
+ intro:'Use “Bu kim?” for people and “Bu ne?” for things.',
+ cards:[['Bu kim?','Who is this?','❓'],['öğretmen','teacher',S('ogretmen')],['öğrenci','student',S('ogrenci')],['doktor','doctor','🧑‍⚕️'],['anne','mother','👩'],['baba','father','👨'],['bebek','baby','👶'],['polis','police officer','👮']],
+ ws:[{q:`${pic(S('ogretmen'))} Bu ___? — Bu öğretmen.`,o:['kim','ne'],a:'kim'},{q:`${pic(S('kitap'))} Bu ___? — Bu kitap.`,o:['kim','ne'],a:'ne'},
+     {q:'<span class="emo">👶</span> Bu ___? — Bu bebek.',o:['kim','ne'],a:'kim'},{q:`${pic(S('makas'))} Bu ___? — Bu makas.`,o:['kim','ne'],a:'ne'},
+     {q:'<span class="emo">🧑‍⚕️</span> Bu kim? — Bu ___.',a:['doktor']},{q:`${pic(S('ogrenci'))} Bu kim? — Bu ___.`,a:['öğrenci']},
+     {q:'<span class="emo">👨</span> Bu kim? — Bu ___. (father)',a:['baba']},{q:'<span class="emo">👩</span> Bu kim? — Bu ___. (mother)',a:['anne']}],
+ quiz:()=>[[S('ogretmen'),'kim'],[S('kitap'),'ne'],['👶','kim'],[S('cetvel'),'ne'],['👮','kim'],[S('sandalye'),'ne'],['🧑‍⚕️','kim'],[S('silgi'),'ne'],['👩','kim'],[S('defter'),'ne']]
+   .map(([p,a])=>({q:`${pic(p)}Which question?`,a:`Bu ${a}?`,o:[a==='kim'?'Bu ne?':'Bu kim?']}))},
+
+{tr:'İşaret Sözcükleri',en:'This · That · These',game:'memory',gname:'Memory Match',
+ cards:[['bu','this (near me)','👇'],['şu','that (a little far)','👉'],['o','that (far away)','🔭'],['bunlar','these (near me)','👇👇'],['şunlar','those (a little far)','👉👉'],['onlar','those / they (far away)','🔭🔭']],
+ ws:[{q:'One pen in your hand: ___ kalem.',o:['Bu','Şu','O'],a:'Bu'},{q:'One chair a little far: ___ sandalye.',o:['Bu','Şu','O'],a:'Şu'},
+     {q:'One bird far away in the sky: ___ kuş.',o:['Bu','Şu','O'],a:'O'},{q:'Many books in your hand: ___ kitaplar.',o:['Bunlar','Şunlar','Onlar'],a:'Bunlar'},
+     {q:'Many desks a little far: ___ sıralar.',o:['Bunlar','Şunlar','Onlar'],a:'Şunlar'},{q:'Many students far away: ___ öğrenciler.',o:['Bunlar','Şunlar','Onlar'],a:'Onlar'},
+     {q:'Write “this” in Turkish: ___',a:['bu']}]},
+
+{tr:'Çoğul Ekleri',en:'Plural: -lar / -ler',game:'quiz',gname:'-lar or -ler?',
+ intro:'Look at the last vowel. a, ı, o, u → -lar · e, i, ö, ü → -ler',
+ cards:[['kitap → kitaplar','book → books',S('kitap')],['kalem → kalemler','pen → pens',S('kalem')],['masa → masalar','table → tables',S('masa')],['defter → defterler','notebook → notebooks',S('defter')],['makas → makaslar','scissors (more than one)',S('makas')],['silgi → silgiler','eraser → erasers',S('silgi')],['okul → okullar','school → schools','🏫'],['göz → gözler','eye → eyes','👁️']],
+ ws:['kitap','kalem','defter','masa','silgi','sıra','makas','cetvel','öğrenci','okul','kapı','göz'].map(w=>({q:`${w}___`,o:['lar','ler'],a:/[aıou][^aeıioöuü]*$/.test(w)?'lar':'ler'})),
+ quiz:()=>['kitap','kalem','masa','silgi','okul','göz','kapı','çanta','öğretmen','sandalye','kuş','ev','top','üzüm'].map(w=>{const s=/[aıou][^aeıioöuü]*$/.test(w)?'lar':'ler';return{q:`${w} + ?`,a:w+s,o:[w+(s==='lar'?'ler':'lar')]}})},
+
+{tr:'Soru Eki',en:'Yes/No Questions: mı · mi · mu · mü',game:'quiz',gname:'Question Race',
+ intro:'Write the question word separately. Look at the last vowel: a/ı → mı · e/i → mi · o/u → mu · ö/ü → mü',
+ cards:[['Bu kitap mı?','Is this a book?',S('kitap')],['Bu kalem mi?','Is this a pen?',S('kalem')],['Bu okul mu?','Is this a school?','🏫'],['Bu sözlük mü?','Is this a dictionary?','📘'],['Bu masa mı?','Is this a table?',S('masa')],['Bu silgi mi?','Is this an eraser?',S('silgi')],['Bu top mu?','Is this a ball?','⚽'],['Bu üzüm mü?','Are these grapes?','🍇']],
+ ws:[['kitap','mı'],['kalem','mi'],['okul','mu'],['sözlük','mü'],['masa','mı'],['silgi','mi'],['kutu','mu'],['göz','mü'],['sandalye','mi'],['kapı','mı']].map(([w,s])=>({q:`Bu ${w} ___?`,o:SUF,a:s})),
+ quiz:()=>[['kitap','mı'],['defter','mi'],['top','mu'],['göz','mü'],['çanta','mı'],['cetvel','mi'],['okul','mu'],['üzüm','mü'],['makas','mı'],['öğrenci','mi'],['kuş','mu'],['sözlük','mü']].map(([w,s])=>({q:`Bu ${w} ___ ?`,a:s,o:SUF.filter(x=>x!==s),say:`Bu ${w} ${s}`}))},
+
+{tr:'“Değil”',en:'Negative with “değil”',game:'quiz',gname:'True or False?',
+ intro:'“değil” means “not”. Hayır, bu kalem değil. = No, this is not a pen.',
+ cards:[['Evet','Yes','✅'],['Hayır','No','❌'],['Evet, bu kitap.','Yes, this is a book.',S('kitap')],['Bu kalem değil.','This is not a pen.',S('silgi')],['Hayır, bu masa değil.','No, this is not a table.',S('sandalye')],['Bu cetvel değil. Bu makas.','This is not a ruler. This is scissors.',S('makas')]],
+ ws:[{q:`${pic(S('kalem'))} Bu silgi mi? — Hayır, bu silgi ___.`,a:['değil']},{q:`${pic(S('makas'))} Bu cetvel mi? — Hayır, bu ___.`,a:['makas']},
+     {q:`${pic(S('kitap'))} Bu kitap mı? — ___, bu kitap.`,o:['Evet','Hayır'],a:'Evet'},{q:`${pic(S('masa'))} Bu sandalye mi? — ___, bu sandalye değil.`,o:['Evet','Hayır'],a:'Hayır'},
+     {q:`${pic(S('defter'))} Bu kitap mı? — Hayır, bu kitap değil. Bu ___.`,a:['defter']},{q:`${pic(S('cetvel'))} Bu kalem mi? — Hayır, bu kalem ___. Bu cetvel.`,a:['değil']}],
+ quiz:()=>OBJ.map(([tr,,p])=>{const t=Math.random()<.5,w=t?tr:wrongs(OBJ.map(x=>x[0]),tr,1)[0];return{q:`${pic(p)}Bu ${w}.`,a:t?'Evet ✓':'Hayır ✗',o:[t?'Hayır ✗':'Evet ✓'],say:t?`Evet, bu ${tr}`:`Hayır, bu ${w} değil. Bu ${tr}`}})},
+
+{tr:'Sayılar 1–20',en:'Numbers 1–20',game:'memory',gname:'Number Memory',
+ cards:[...Array(20)].map((_,i)=>[word(i+1),String(i+1),`<b style="font-size:3rem;font-family:var(--display)">${i+1}</b>`]),
+ ws:[{q:'5 = ___',a:['beş']},{q:'12 = ___',a:['on iki']},{q:'18 = ___',a:['on sekiz']},{q:'dokuz = ___ (digits)',a:['9']},{q:'on altı = ___ (digits)',a:['16']},{q:'7 + 3 = ___ (in Turkish)',a:['on']},{q:'20 − 6 = ___ (in Turkish)',a:['on dört']},{q:'bir, iki, ___, dört',a:['üç']}],
+ pairs:()=>shuffle([...Array(20)].map((_,i)=>i+1)).slice(0,6).map(n=>[`<b style="font-size:1.8em">${n}</b>`,word(n)])},
+
+{tr:'Sayılar 20–100',en:'Numbers 20–100',game:'quiz',gname:'Number Race',
+ intro:'Tens + ones: 35 = otuz beş, 99 = doksan dokuz.',
+ cards:[20,30,40,50,60,70,80,90,100,25,47,83].map(n=>[word(n),String(n),`<b style="font-size:3rem;font-family:var(--display)">${n}</b>`]),
+ ws:[{q:'45 = ___',a:['kırk beş']},{q:'67 = ___',a:['altmış yedi']},{q:'100 = ___',a:['yüz']},{q:'90 = ___',a:['doksan']},{q:'otuz iki = ___ (digits)',a:['32']},{q:'elli = ___ (digits)',a:['50']},{q:'seksen beş = ___ (digits)',a:['85']},{q:'yirmi, otuz, ___, elli',a:['kırk']}],
+ quiz:()=>shuffle([...Array(81)].map((_,i)=>i+20)).slice(0,10).map(n=>{const w=new Set();while(w.size<3){const m=Math.min(100,Math.max(20,n+[-11,-10,-1,1,9,10,11][Math.random()*7|0]));if(m!==n)w.add(String(m))}return{q:word(n),a:String(n),o:[...w]}})},
+
+{tr:'Sıra Sayıları',en:'Ordinal Numbers',game:'scramble',gname:'Word Builder',
+ intro:'Add -ıncı / -inci / -uncu / -üncü. With digits, write a dot: 1. = birinci',
+ cards:ORD.map((w,i)=>[w,`${['first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth'][i]} (${i+1}.)`,`<b style="font-size:3rem;font-family:var(--display)">${i+1}.</b>`]),
+ ws:[{q:'🥇 Ali is first. Ali ___.',a:['birinci']},{q:'🥈 Ayşe is second. Ayşe ___.',a:['ikinci']},{q:'🥉 Can is third. Can ___.',a:['üçüncü']},{q:'dördüncü = ___ (digits)',a:['4.','4']},{q:'5. = ___',a:['beşinci']},{q:'10. = ___',a:['onuncu']},{q:'7. = ___',o:['yedinci','yedıncı','yedünci'],a:'yedinci'}],
+ words:()=>ORD.map((w,i)=>({w,hint:`<b style="font-size:2.4rem">${i+1}.</b>`}))},
+];
+
+/* ============ İLERLEME ============ */
+let done=new Set();
+try{done=new Set(JSON.parse(localStorage.getItem('t13-done')||'[]'))}catch(e){}
+function markDone(i){done.add(i);try{localStorage.setItem('t13-done',JSON.stringify([...done]))}catch(e){}drawNav()}
+
+/* ============ NAV ============ */
+let cur=0,part='fc',timer=null;
+function drawNav(){
+  $('#units').innerHTML=U.map((u,i)=>`<button class="ubtn${done.has(i)?' done':''}" data-i="${i}" aria-current="${i===cur}"><span class="n">${done.has(i)?'✓':i+1}</span><b>${u.tr}</b><small>${u.en}</small></button>`).join('');
+  $('#units').querySelectorAll('.ubtn').forEach(b=>b.onclick=()=>{location.hash='u'+(+b.dataset.i+1)});
+}
+function route(){const m=/^#u(\d+)$/.exec(location.hash);const n=m?+m[1]-1:0;cur=(n>=0&&n<U.length)?n:0;part='fc';drawNav();drawUnit()}
+window.addEventListener('hashchange',()=>{route();$('#unit').scrollIntoView({block:'start'})});
+
+function drawUnit(){
+  clearInterval(timer);
+  const u=U[cur];
+  $('#unit').innerHTML=`<div class="uhead"><div><div class="eyebrow">Unit ${cur+1} of 13</div><h2>${u.tr}</h2></div><span class="en">${u.en}</span></div>
+   <div class="parts" role="tablist">
+     <button class="part" role="tab" data-p="fc" aria-selected="${part==='fc'}">1 · Flashcards</button>
+     <button class="part" role="tab" data-p="ws" aria-selected="${part==='ws'}">2 · Worksheet</button>
+     <button class="part" role="tab" data-p="game" aria-selected="${part==='game'}">3 · Game</button>
+   </div><div id="body" style="display:grid;gap:14px"></div>
+   <div class="unav"><button class="btn ghost" id="prevU" ${cur===0?'hidden':''}>◀ Unit ${cur}</button><span></span><button class="btn ghost" id="nextU" ${cur===12?'hidden':''}>Unit ${cur+2} ▶</button></div>`;
+  $('#unit').querySelectorAll('.part').forEach(b=>b.onclick=()=>{part=b.dataset.p;drawUnit()});
+  $('#prevU').onclick=()=>location.hash='u'+cur;
+  $('#nextU').onclick=()=>location.hash='u'+(cur+2);
+  ({fc:flashcards,ws:worksheet,game:gameView})[part](u,$('#body'));
+}
+
+/* ============ 1. FLASHCARDS ============ */
+function flashcards(u,el){
+  let order=[...u.cards],i=0;
+  el.innerHTML=`${u.intro?`<p style="margin:0;max-width:70ch;font-weight:700">${u.intro}</p>`:''}
+  <p class="dir">Look at the picture and read the Turkish word. Tap the card to see the English meaning. Press 🔊 to listen.</p>
+  <div class="fcwrap"><button class="fc" id="fc" aria-label="Flip card"><span class="fc-in"><span class="face front" id="ff"></span><span class="face back" id="fbk"></span></span></button>
+  <div class="fcbar"><button class="btn ghost" id="pv">◀ Back</button><span class="cnt" id="cnt"></span><button class="btn ghost" id="nx">Next ▶</button></div>
+  <div class="fcbar"><button class="btn" id="ls">🔊 Listen</button><button class="btn ghost" id="sh">🔀 Shuffle</button><button class="btn ghost" id="toWs">Go to Worksheet →</button></div></div>`;
+  const draw=()=>{const [tr,en,p]=order[i];$('#fc').classList.remove('flip');
+    $('#ff').innerHTML=`<span class="big">${p.startsWith('<')?p:pic(p)}</span><span class="tr">${tr}</span><span class="hint">Tap to flip</span>`;
+    $('#fbk').innerHTML=`<span class="enw">${en}</span><span class="hint">${tr}</span>`;
+    $('#cnt').textContent=`${i+1} / ${order.length}`};
+  $('#fc').onclick=()=>$('#fc').classList.toggle('flip');
+  $('#pv').onclick=()=>{i=(i-1+order.length)%order.length;draw()};
+  $('#nx').onclick=()=>{i=(i+1)%order.length;draw()};
+  $('#sh').onclick=()=>{order=shuffle(order);i=0;draw()};
+  $('#ls').onclick=()=>say(order[i][3]||order[i][0]);
+  $('#toWs').onclick=()=>{part='ws';drawUnit()};
+  draw();
+}
+
+/* ============ 2. WORKSHEET ============ */
+function worksheet(u,el){
+  const pairs=shuffle(u.cards).slice(0,6);
+  el.innerHTML=`<div class="wshead"><h3>Part A · Matching</h3><span class="score" id="mS">0 / ${pairs.length}</span></div>
+  <p class="dir">Tap a Turkish word on the left. Then tap its English meaning on the right.</p>
+  <div class="match"><div class="col" id="mL"></div><div class="col" id="mR"></div></div>
+  <div class="wshead"><h3>Part B · Fill in the blanks</h3><span class="score" id="fS"></span></div>
+  <p class="dir">Choose the correct answer from the list or type the missing word. Then press “Check answers”.</p>
+  <ol class="fill" id="fill"></ol>
+  <div class="actions"><button class="btn" id="chk">Check answers</button><button class="btn ghost" id="clr">Clear</button><button class="btn ghost" id="toG">Go to Game →</button></div>`;
+  // Part A
+  let sel=null,got=0;
+  const short=p=>p.startsWith('<')?'':pic(p);
+  $('#mL').innerHTML=pairs.map((c,k)=>`<button class="mbtn" data-k="${k}">${short(c[2])}<span>${c[0]}</span></button>`).join('');
+  $('#mR').innerHTML=shuffle(pairs.map((c,k)=>[c,k])).map(([c,k])=>`<button class="mbtn" data-k="${k}">${c[1]}</button>`).join('');
+  $('#mL').querySelectorAll('.mbtn').forEach(b=>b.onclick=()=>{if(b.classList.contains('ok'))return;$('#mL').querySelectorAll('.sel').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=b;say(pairs[b.dataset.k][3]||pairs[b.dataset.k][0])});
+  $('#mR').querySelectorAll('.mbtn').forEach(b=>b.onclick=()=>{
+    if(!sel||b.classList.contains('ok'))return;
+    if(sel.dataset.k===b.dataset.k){[sel,b].forEach(x=>{x.classList.remove('sel');x.classList.add('ok')});sel=null;got++;$('#mS').textContent=`${got} / ${pairs.length}`+(got===pairs.length?' 🎉':'')}
+    else{b.classList.add('bad');setTimeout(()=>b.classList.remove('bad'),600)}});
+  // Part B
+  const W=u.ws;
+  $('#fill').innerHTML=W.map((q,i)=>{const [a,b]=q.q.split('___');
+    const ctl=q.o?`<select id="w${i}" aria-label="Question ${i+1}"><option value="">…</option>${shuffle(q.o).map(o=>`<option>${o}</option>`).join('')}</select>`
+                :`<input id="w${i}" aria-label="Question ${i+1}" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+    return `<li>${a}${ctl}${b||''}<span class="fb" id="wb${i}"></span></li>`}).join('');
+  $('#chk').onclick=()=>{let ok=0;W.forEach((q,i)=>{const e=$('#w'+i),f=$('#wb'+i);
+    const good=q.o?e.value===q.a:q.a.some(x=>norm(x)===norm(e.value));
+    e.classList.toggle('ok',good);e.classList.toggle('bad',!good);f.className='fb '+(good?'ok':'bad');f.textContent=good?'✓':'✗ '+(q.o?q.a:q.a[0]);if(good)ok++});
+    $('#fS').textContent=`${ok} / ${W.length}`+(ok===W.length?' 🌟 Excellent!':'')};
+  $('#clr').onclick=()=>{W.forEach((q,i)=>{const e=$('#w'+i);e.value='';e.className='';$('#wb'+i).textContent=''});$('#fS').textContent=''};
+  $('#toG').onclick=()=>{part='game';drawUnit()};
+}
+
+/* ============ 3. GAMES ============ */
+const DIRS={quiz:'Read the question and choose the correct answer before the time runs out. Faster answers get more points.',
+  memory:'Turn over two cards. Find the Turkish word and its English meaning. Find all the pairs in as few moves as you can.',
+  scramble:'Look at the picture. Tap the letters in the right order to spell the Turkish word. Press “Undo” to remove a letter.'};
+function gameView(u,el){
+  el.innerHTML=`<p class="dir">${DIRS[u.game]}</p><div class="game" id="g"><h3>${u.gname}</h3><button class="btn" id="go">Start the game</button></div>`;
+  $('#go').onclick=()=>({quiz,memory,scramble})[u.game](u);
+}
+function stars(n){return`<div class="stars">${'★'.repeat(n)}${'☆'.repeat(3-n)}</div>`}
+function finish(u,s,line){
+  if(s>=2)markDone(cur);
+  $('#g').innerHTML=`<h3>Game over!</h3>${stars(s)}<p class="qbox">${line}</p>
+   <p style="margin:0;font-weight:700">${s===3?'Excellent! Mükemmel!':s===2?'Well done! Aferin!':'Look at the flashcards again and try once more.'}</p>
+   <div class="actions" style="justify-content:center"><button class="btn" id="again">Play again</button>${cur<12?'<button class="btn ghost" id="nu">Next unit ▶</button>':''}</div>`;
+  $('#again').onclick=()=>({quiz,memory,scramble})[u.game](u);
+  if(cur<12)$('#nu').onclick=()=>location.hash='u'+(cur+2);
+}
+
+/* quiz */
+function quiz(u){
+  const pool=u.quiz?u.quiz():u.cards.map(c=>({q:`${pic(c[2])}${c[0]}`,a:c[1],o:wrongs(u.cards.map(x=>x[1]),c[1]),say:c[3]||c[0]}));
+  const G={qs:shuffle(pool).slice(0,8),i:0,score:0,ok:0};
+  const next=()=>{
+    if(G.i>=G.qs.length){const s=G.ok>=7?3:G.ok>=5?2:G.ok>=3?1:0;return finish(u,s,`${G.ok} / ${G.qs.length} correct · ${G.score} points`)}
+    const q=G.qs[G.i],opts=shuffle([q.a,...q.o]);
+    $('#g').innerHTML=`<div class="hud"><span>Question ${G.i+1}/${G.qs.length}</span><span>Points: ${G.score}</span><span>✓ ${G.ok}</span></div>
+     <div class="timer"><i id="bar"></i></div><div class="qbox">${q.q}</div>
+     <div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}">${o}</button>`).join('')}</div>`;
+    const T=12000,t0=performance.now();
+    const ans=b=>{clearInterval(timer);const right=b&&opts[b.dataset.k]===q.a;
+      document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(opts[x.dataset.k]===q.a)x.classList.add('ok')});
+      if(right){G.ok++;G.score+=50+Math.round(50*Math.max(0,1-(performance.now()-t0)/T))}else if(b)b.classList.add('bad');
+      say(q.say||q.a.replace(/[✓✗]/g,''));G.i++;setTimeout(next,1400)};
+    clearInterval(timer);timer=setInterval(()=>{const r=1-(performance.now()-t0)/T;const bar=$('#bar');if(bar)bar.style.width=Math.max(0,r*100)+'%';if(r<=0)ans(null)},100);
+    document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>ans(b));
+  };
+  next();
+}
+
+/* memory */
+function memory(u){
+  const pairs=u.pairs?u.pairs():shuffle(u.cards).slice(0,6).map(c=>[`${c[2].startsWith('<')?'':pic(c[2])}<span>${c[0]}</span>`,c[1]]);
+  const tiles=shuffle(pairs.flatMap((p,k)=>[{k,h:p[0]},{k,h:p[1]}]));
+  let open=[],moves=0,found=0,lock=false;
+  $('#g').innerHTML=`<div class="hud"><span id="mv">Moves: 0</span><span id="fd">Pairs: 0 / ${pairs.length}</span></div><div class="mem" id="mem"></div>`;
+  $('#mem').innerHTML=tiles.map((t,i)=>`<button class="tile closed" data-i="${i}" aria-label="Card ${i+1}">?</button>`).join('');
+  $('#mem').querySelectorAll('.tile').forEach(b=>b.onclick=()=>{
+    const t=tiles[b.dataset.i];if(lock||!b.classList.contains('closed'))return;
+    b.classList.remove('closed');b.classList.add('open');b.innerHTML=t.h;open.push(b);
+    if(open.length===2){moves++;$('#mv').textContent='Moves: '+moves;const [x,y]=open;
+      if(tiles[x.dataset.i].k===tiles[y.dataset.i].k){[x,y].forEach(e=>{e.classList.remove('open');e.classList.add('ok')});open=[];found++;
+        $('#fd').textContent=`Pairs: ${found} / ${pairs.length}`;
+        if(found===pairs.length)setTimeout(()=>finish(u,moves<=9?3:moves<=13?2:1,`All pairs found in ${moves} moves`),700)}
+      else{lock=true;setTimeout(()=>{[x,y].forEach(e=>{e.classList.remove('open');e.classList.add('closed');e.textContent='?'});open=[];lock=false},950)}}
+  });
+}
+
+/* scramble */
+function scramble(u){
+  const W=shuffle(u.words()).slice(0,6);let i=0,ok=0;
+  const up=s=>s.toLocaleUpperCase('tr-TR');
+  const round=()=>{
+    if(i>=W.length)return finish(u,ok>=6?3:ok>=4?2:ok>=2?1:0,`${ok} / ${W.length} words correct`);
+    const w=up(W[i].w),L=[...w];let mix;do{mix=shuffle(L.map((c,k)=>({c,k})))}while(L.length>1&&mix.map(x=>x.c).join('')===w);
+    let picked=[];
+    $('#g').innerHTML=`<div class="hud"><span>Word ${i+1}/${W.length}</span><span>✓ ${ok}</span></div>
+     <div class="qbox">${W[i].hint}</div><div class="slots" id="sl"></div>
+     <div class="letters">${mix.map((x,k)=>`<button class="let" data-k="${k}">${x.c}</button>`).join('')}</div>
+     <div class="actions" style="justify-content:center"><button class="btn ghost" id="un">↩ Undo</button><button class="btn ghost" id="sk">Show answer</button></div>`;
+    const slots=()=>{$('#sl').innerHTML=L.map((_,k)=>`<span class="slot">${picked[k]?mix[picked[k].k].c:''}</span>`).join('')};slots();
+    const btns=[...document.querySelectorAll('.let')];
+    btns.forEach(b=>b.onclick=()=>{picked.push({k:+b.dataset.k});b.disabled=true;slots();
+      if(picked.length===L.length){const got=picked.map(p=>mix[p.k].c).join('');
+        if(got===w){$('#sl').classList.add('ok');ok++;say(W[i].w);i++;setTimeout(round,1100)}
+        else{$('#sl').classList.add('bad');setTimeout(()=>{$('#sl').classList.remove('bad');picked=[];btns.forEach(x=>x.disabled=false);slots()},700)}}});
+    $('#un').onclick=()=>{const p=picked.pop();if(p){btns[p.k].disabled=false;slots()}};
+    $('#sk').onclick=()=>{$('#sl').innerHTML=L.map(c=>`<span class="slot">${c}</span>`).join('');$('#sl').classList.add('bad');btns.forEach(x=>x.disabled=true);say(W[i].w);i++;setTimeout(round,1600)};
+  };
+  round();
+}
+
+route();
+</script>
+
+</body></html>
